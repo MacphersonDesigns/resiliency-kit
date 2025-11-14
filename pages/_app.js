@@ -2,9 +2,18 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import '@/styles/globals.css'
 import { parseCookies, setCookie } from 'nookies'
+import { PrismicProvider } from '@prismicio/react'
+import { PrismicPreview } from '@prismicio/next'
+import { linkResolver, repositoryName } from '@/prismicio'
 
 export default function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />
+    return (
+        <PrismicProvider linkResolver={linkResolver}>
+            <PrismicPreview repositoryName={repositoryName}>
+                <Component {...pageProps} />
+            </PrismicPreview>
+        </PrismicProvider>
+    )
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
