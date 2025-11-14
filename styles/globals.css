@@ -1,6 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Custom Colors */
+  --color-blue-50: #EFF6FF;
+  --color-blue-100: #e5e6fb;
+  --color-blue-200: #babdf2;
+  --color-blue-300: #6367c1;
+  --color-blue-400: #40458e;
+  --color-blue-500: #272a64;
+  --color-blue-600: #1C204A;
+
+  --color-orange-100: #fceae5;
+  --color-orange-200: #eeb5a8;
+  --color-orange-300: #e9745b;
+  --color-orange-400: #ac2509;
+  --color-orange-500: #8f1f07;
+
+  --color-gray-100: #FAFAFA;
+  --color-gray-150: #F7F7F7;
+  --color-gray-200: #F0F0F0;
+  --color-gray-300: #E4E4E4;
+  --color-gray-400: #CFCFCF;
+  --color-gray-500: #BBBBBB;
+  --color-gray-600: #A1A1A1;
+  --color-gray-700: #646464;
+  --color-gray-800: #404040;
+  --color-gray-900: #222222;
+
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Custom Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
 
 @import url("https://use.typekit.net/shg3dqr.css");
 
@@ -54,7 +90,7 @@
     box-shadow: inset 0 1px 0 #fafafa;
   }
 
-  @screen md {
+  @media (min-width: 768px) {
     .blob {
       width: 25vw;
       height: 100vh;
@@ -69,7 +105,7 @@
     }
   }
 
-  @screen lg {
+  @media (min-width: 1024px) {
     .blob {
       width: 40vw;
     }
@@ -83,19 +119,19 @@
     @apply text-2xl font-bold leading-tight;
   }
 
-  @screen sm {
+  @media (min-width: 640px) {
     h1, .h1 {
       @apply text-3xl
     }
   }
 
-  @screen md {
+  @media (min-width: 768px) {
     h1, .h1 {
       @apply text-4xl;
     }
   }
 
-  @screen lg {
+  @media (min-width: 1024px) {
     h1, .h1 {
       @apply text-4xl;
     }
@@ -105,7 +141,7 @@
     @apply text-2xl font-bold;
   }
 
-  @screen lg {
+  @media (min-width: 1024px) {
     h2, .h2 {
       @apply text-3xl;
     }
@@ -115,7 +151,7 @@
     @apply text-xl font-bold leading-tight;
   }
 
-  @screen lg {
+  @media (min-width: 1024px) {
     h3, .h3 {
       @apply text-2xl;
     }
@@ -197,7 +233,7 @@
   }
 
   .form input[type="radio"]:focus + label {
-    @apply shadow-outline;
+    @apply ring-2 ring-blue-300;
   }
 
   .form input[type="checkbox"]:checked + label {
@@ -214,7 +250,7 @@
   }
 
   .form input[type="checkbox"]:focus + label {
-    @apply shadow-outline;
+    @apply ring-2 ring-blue-300;
   }
 
   .checklist-item {
@@ -249,7 +285,7 @@
   }
 
   .custom-checkbox-control:focus ~ .custom-checkbox {
-    @apply shadow-outline
+    @apply ring-2 ring-blue-300
   }
 
   @media print {
@@ -293,13 +329,13 @@
     @apply opacity-50;
   }
 
-  @screen sm {
+  @media (min-width: 640px) {
     .footer_content p {
       @apply text-base;
     }
   }
 
-  @screen md {
+  @media (min-width: 768px) {
     .footer_content p {
       @apply text-gray-700;
     }
@@ -318,7 +354,7 @@
     z-index: 800;
   }
 
-  @screen lg {
+  @media (min-width: 1024px) {
     .slick-prev,
     .slick-next {
       bottom: calc(0px - 2rem);

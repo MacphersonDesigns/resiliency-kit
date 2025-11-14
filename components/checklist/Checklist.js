@@ -1,4 +1,4 @@
-import { RichText } from 'prismic-reactjs'
+import { PrismicRichText } from '@prismicio/react'
 import React, { Fragment, useEffect } from 'react'
 import useStickyState from '@/lib/useStickyState'
 import { filterCheckListItems, sortChecklistItems } from '@/lib/helpers'
