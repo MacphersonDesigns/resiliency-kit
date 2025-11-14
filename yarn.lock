@@ -1299,12 +1299,19 @@
   resolved "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-15.2.2.tgz"
   integrity sha512-PXTW9PLTxdNlVYgPJ0equojcq1kNu5NtwcNjRjHAB+/sdoKZ+X8FBu70fdJFadkxFIGekQTyRvPMFF+SOJaQjw==
 
-"@prismicio/client@^6 || ^7", "@prismicio/client@^7.15.0":
+"@prismicio/client@^6 || ^7", "@prismicio/client@^7", "@prismicio/client@^7.15.0":
   version "7.21.0"
   resolved "https://registry.npmjs.org/@prismicio/client/-/client-7.21.0.tgz"
   integrity sha512-9FWmywGC4nAsgrVk6khRJQ6Qvzb/KwbwsVqfHIM+N/Hxxn+V34u+L/X1XzCxwMdGWF5lvH8lLmmrOLowpO4KVA==
   dependencies:
     imgix-url-builder "^0.0.6"
+
+"@prismicio/next@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/@prismicio/next/-/next-2.0.2.tgz"
+  integrity sha512-e5Cxnl0Vdoqh8mZevJg6DDLbNBb6ta6VNvA9bmI0dNxWMvizkZm61xZWpjYpC1j73gXFYrJXWqdcyDc5au83xw==
+  dependencies:
+    imgix-url-builder "^0.0.5"
 
 "@prismicio/react@^2.9.2":
   version "2.9.2"
@@ -1922,6 +1929,11 @@ hasown@^2.0.2:
   dependencies:
     function-bind "^1.1.2"
 
+imgix-url-builder@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/imgix-url-builder/-/imgix-url-builder-0.0.5.tgz"
+  integrity sha512-dCx3UlXghtsjySoqVCcHQHRikqDummwQEfKlxBUK/wrMzd+1ox/XX+zhqVuXKMVuZvCc84pVLEJyntQB0OOi/w==
+
 imgix-url-builder@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/imgix-url-builder/-/imgix-url-builder-0.0.6.tgz"
@@ -2081,7 +2093,7 @@ nanoid@^3.3.11, nanoid@^3.3.6:
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.11.tgz"
   integrity sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==
 
-next@^15.2.2:
+"next@^13.4.5 || ^14 || ^15 || ^16.0.0-beta.0", next@^15.2.2:
   version "15.2.2"
   resolved "https://registry.npmjs.org/next/-/next-15.2.2.tgz"
   integrity sha512-dgp8Kcx5XZRjMw2KNwBtUzhngRaURPioxoNIVl5BOyJbhi9CUgEtKDO7fx5wh8Z8vOVX1nYZ9meawJoRrlASYA==
@@ -2482,7 +2494,7 @@ react-slick@^0.30.3:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
-"react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1", "react@^18 || ^19 || ^19.0.0-rc", "react@^18 || ^19.0.0-rc.0", "react@^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", react@^19.0.0, "react@>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0", react@>=16.8.0, react@19.0.0:
+"react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1", "react@^18 || ^19", "react@^18 || ^19 || ^19.0.0-rc", "react@^18 || ^19.0.0-rc.0", "react@^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", react@^19.0.0, "react@>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0", react@>=16.8.0, react@19.0.0:
   version "19.0.0"
   resolved "https://registry.npmjs.org/react/-/react-19.0.0.tgz"
   integrity sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==
