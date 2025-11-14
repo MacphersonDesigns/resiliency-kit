@@ -1,7 +1,12 @@
-import Slider from 'react-slick'
 import Image from 'next/image'
+import Slider from 'react-slick'
 
 export const HomepageSlider = ({ people }) => {
+    // Return null if no people data
+    if (!people || people.length === 0) {
+        return null
+    }
+
     function shuffle(array) {
         var currentIndex = array.length,
             temporaryValue,

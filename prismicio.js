@@ -1,10 +1,10 @@
 import * as prismic from '@prismicio/client'
-import { enableAutoPreviews } from '@prismicio/next'
 
 /**
  * The project's Prismic repository name.
  */
-export const repositoryName = process.env.PRISMIC_REPOSITORY_NAME || 'resiliency-kit'
+export const repositoryName =
+    process.env.PRISMIC_REPOSITORY_NAME || 'resiliency-kit'
 
 /**
  * Creates a Prismic client for the project's repository. The client is used to
@@ -18,19 +18,13 @@ export const createClient = (config = {}) => {
         ...config,
     })
 
-    enableAutoPreviews({
-        client,
-        previewData: config.previewData,
-        req: config.req,
-    })
-
     return client
 }
 
 /**
  * Link Resolver for Prismic. This function converts a Prismic document to a URL.
  */
-export const linkResolver = (doc) => {
+export const linkResolver = doc => {
     // URL for a category type
     if (doc.type === 'category') {
         return `/category/${doc.uid}`

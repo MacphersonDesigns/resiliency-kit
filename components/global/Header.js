@@ -1,8 +1,8 @@
+import LanguageSwitcher from '@/components/global/LanguageSwitcher'
 import Logo from '@/components/global/Logo.js'
+import useStickyState from '@/lib/useStickyState'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import LanguageSwitcher from '@/components/global/LanguageSwitcher'
-import useStickyState from '@/lib/useStickyState'
 
 export default function Header({ headerContent }) {
     const router = useRouter()
@@ -17,18 +17,22 @@ export default function Header({ headerContent }) {
                     <LanguageSwitcher />
                 </div>
                 {router.pathname.indexOf('about') > 0 ? (
-                    <Link href="/checklist" locale={locale}>
-                        <a className="print:hidden btn btn-small bg-gray-300 hover:bg-gray-400 md:bg-orange-400 md:hover:bg-orange-500 text-gray-900 md:text-white">
-                            {!answersData || answersData.length === 0
-                                ? headerContent.button_cta
-                                : headerContent.button_cta_returning_users}
-                        </a>
+                    <Link
+                        href="/checklist"
+                        locale={locale}
+                        className="print:hidden btn btn-small bg-gray-300 hover:bg-gray-400 md:bg-orange-400 md:hover:bg-orange-500 text-gray-900 md:text-white"
+                    >
+                        {!answersData || answersData.length === 0
+                            ? headerContent.button_cta
+                            : headerContent.button_cta_returning_users}
                     </Link>
                 ) : (
-                    <Link href="/about" locale={locale}>
-                        <a className="print:hidden btn btn-small bg-gray-300 hover:bg-gray-400 md:bg-orange-400 md:hover:bg-orange-500 text-gray-900 md:text-white">
-                            {headerContent.about_button_text}
-                        </a>
+                    <Link
+                        href="/about"
+                        locale={locale}
+                        className="print:hidden btn btn-small bg-gray-300 hover:bg-gray-400 md:bg-orange-400 md:hover:bg-orange-500 text-gray-900 md:text-white"
+                    >
+                        {headerContent.about_button_text}
                     </Link>
                 )}
             </div>

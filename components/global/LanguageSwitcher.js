@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { localeDisplayName } from '@/lib/localeFormat'
 import Caret from '@/public/caret.svg'
 import Check from '@/public/check-blue.svg'
-import { localeDisplayName } from '@/lib/localeFormat'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { setCookie } from 'nookies'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export default function LanguageSwitcher() {
     const [isOpen, setIsOpen] = useState(false)
@@ -119,25 +119,22 @@ export default function LanguageSwitcher() {
                     <ul>
                         {locales.map((item, index) => (
                             <li key={index}>
-                                <Link href={router.pathname} locale={item}>
-                                    <a
-                                        className={`w-full flex items-center justify-between text-left px-4 py-1 hover:bg-gray-200 cursor-pointer ${
-                                            item === locale && 'font-semibold'
-                                        }`}
-                                        onClick={() =>
-                                            setCookie(
-                                                null,
-                                                'NEXT_LOCALE',
-                                                item,
-                                                { path: '/' }
-                                            )
-                                        }
-                                    >
-                                        <span>{localeDisplayName(item)}</span>
-                                        {item === locale && (
-                                            <Check className="w-4 h-4" />
-                                        )}
-                                    </a>
+                                <Link
+                                    href={router.pathname}
+                                    locale={item}
+                                    className={`w-full flex items-center justify-between text-left px-4 py-1 hover:bg-gray-200 cursor-pointer ${
+                                        item === locale && 'font-semibold'
+                                    }`}
+                                    onClick={() =>
+                                        setCookie(null, 'NEXT_LOCALE', item, {
+                                            path: '/',
+                                        })
+                                    }
+                                >
+                                    <span>{localeDisplayName(item)}</span>
+                                    {item === locale && (
+                                        <Check className="w-4 h-4" />
+                                    )}
                                 </Link>
                             </li>
                         ))}

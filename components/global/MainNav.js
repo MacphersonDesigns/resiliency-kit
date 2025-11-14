@@ -1,7 +1,7 @@
 // Unused
 
-import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 export default function MainNav() {
     const [isOpen, setIsOpen] = useState(false)
@@ -95,34 +95,36 @@ export default function MainNav() {
                     <nav className="block">
                         <ul>
                             <li>
-                                <Link href="/" passHref>
-                                    <a
-                                        ref={firstLink}
-                                        className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold"
-                                    >
-                                        Home
-                                    </a>
+                                <Link
+                                    href="/"
+                                    ref={firstLink}
+                                    className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold"
+                                >
+                                    Home
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/resources">
-                                    <a className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold">
-                                        Resource Checklist
-                                    </a>
+                                <Link
+                                    href="/resources"
+                                    className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold"
+                                >
+                                    Resource Checklist
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/about">
-                                    <a className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold">
-                                        About This Project
-                                    </a>
+                                <Link
+                                    href="/about"
+                                    className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold"
+                                >
+                                    About This Project
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/contact">
-                                    <a className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold">
-                                        Contact Us
-                                    </a>
+                                <Link
+                                    href="/contact"
+                                    className="text-white hover:text-gray-500 hover:underline py-3 px-2 block font-semibold"
+                                >
+                                    Contact Us
                                 </Link>
                             </li>
                         </ul>
