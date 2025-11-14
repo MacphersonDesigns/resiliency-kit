@@ -1,55 +1,215 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Resiliency Kit
 
-## Getting Started
----
+A personalized business resiliency checklist built with Next.js 15 and Prismic CMS.
 
-Install npm packages:
+## Overview
+
+This is a quiz-based tool that generates personalized business recommendations. Users answer questions about their business, and get a filtered checklist of action items.
+
+**Tech Stack:**
+- Next.js 15.2.2 (Pages Router)
+- React 19
+- Prismic CMS (REST API)
+- CSS Modules
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+ installed
+- A Prismic account (free tier works fine)
+- 15-20 minutes for initial setup
+
+### 1. Clone and Install
 
 ```bash
-yarn
+git clone <your-repo-url>
+cd resiliency-kit
+npm install
 ```
 
-Run the development server:
+### 2. Set Up Prismic CMS
+
+This project requires content from Prismic CMS. You'll need to:
+
+1. **Create a Prismic repository** at [prismic.io](https://prismic.io)
+2. **Import 8 custom types** from the `/types` folder
+3. **Create 4 required documents** (homepage, globals, about, resources_page)
+4. **Get your API token**
+
+**📖 Follow the detailed guide:** [`PRISMIC_SETUP.md`](./PRISMIC_SETUP.md)
+
+⚠️ **Note:** Yes, this setup is more complex than it should be. See `MODERNIZATION_ROADMAP.md` for our plan to simplify this.
+
+### 3. Configure Environment Variables
+
+Create a `.env.local` file in the root:
 
 ```bash
-yarn dev
+PRISMIC_REPOSITORY_NAME="your-repo-name"
+PRISMIC_API_TOKEN="your-token-here"
+PRISMIC_REPOSITORY_LOCALE="en-us"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Where to find these:**
+- `PRISMIC_REPOSITORY_NAME`: The name you chose when creating your Prismic repo (must be URL-friendly)
+- `PRISMIC_API_TOKEN`: Settings → API & Security → Generate an Access Token (Permanent)
+- `PRISMIC_REPOSITORY_LOCALE`: Your default locale (usually `en-us`)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 4. Run Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) - you should see your site!
+
+If you see errors, check the troubleshooting section in `PRISMIC_SETUP.md`.
+
+## Project Structure
+
+```
+resiliency-kit/
+├── pages/              # Next.js pages (index, about, checklist)
+├── components/         # React components
+├── lib/               # API functions and utilities
+│   └── api.js        # Prismic data fetching
+├── styles/           # CSS modules
+├── types/            # Prismic custom type schemas (JSON)
+└── public/           # Static assets
+```
+
+## How It Works
+
+1. **Homepage** (`/`) - User starts the quiz
+2. **Quiz questions** - Dynamically loaded from Prismic (business type, size, sector, etc.)
+3. **Results** (`/checklist`) - Filtered checklist items based on user answers
+4. **About page** (`/about`) - Information about the tool
+
+All content is stored in Prismic and fetched via the REST API (`lib/api.js`).
+
+## Understanding the Architecture
+
+### What's Managed in Prismic?
+
+Currently **8 custom types** (see `types/` folder):
+
+**Static Content** (should eventually move to code):
+- `globals` - Button labels, footer text, help text
+- `homepage` - Page heading, time promise, SEO
+- `about` - About page content
+- `resources_page` - Checklist page layout text
+
+**Dynamic Content** (makes sense in CMS):
+- `checklist_item` - Business recommendations
+- `question` (qualifier) - Quiz questions
+- `answer` - Answer options
+- `person` - Testimonials (optional)
+
+📖 **See `MODERNIZATION_ROADMAP.md`** for our plan to simplify this architecture.
+
+## Customization Guide
+
+### Adding a New Quiz Question
+
+1. **In Prismic:** Create a new `qualifier` document
+   - Set question text and description
+   - Set `question_identifier` (e.g., "industry")
+   - Add answer options (link to `answer` documents)
+   - Set display order
+
+2. **If adding a new filter type:**
+   - Edit `checklist_item` custom type in Prismic
+   - Add a new Group field in the "Filters" tab
+   - API ID must match the `question_identifier`
+   - Add relationship field pointing to `answer` type with appropriate tag
+
+### Adding Checklist Items
+
+1. Create a new `checklist_item` document in Prismic
+2. Fill in title and description
+3. Add related resources (links, templates, videos)
+4. Set filters:
+   - `applies_to_all`: Shows to everyone
+   - Or link specific answers this item applies to
+
+### Multi-language Support
+
+Currently configured for `en-us`. To add languages:
+
+1. **In Prismic:** Settings → Translations & Locales → Add language
+2. **In code:** Update `next.config.js` i18n configuration
+3. **In code:** Update `/lib/localeFormat.js` with new locale format
+4. **In Prismic:** Translate all documents to new locale
+
+## Development
+
+### Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
+
+### Key Files
+
+- `lib/api.js` - All Prismic API calls
+- `prismicio.js` - Prismic client configuration
+- `pages/index.js` - Homepage with quiz
+- `pages/checklist.js` - Results page
+- `components/` - Reusable UI components
+
+## Deployment
+
+### Environment Variables
+
+Make sure to set these in your deployment platform:
+
+```bash
+PRISMIC_REPOSITORY_NAME="your-repo-name"
+PRISMIC_API_TOKEN="your-permanent-access-token"
+PRISMIC_REPOSITORY_LOCALE="en-us"
+```
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy!
+
+The site will auto-deploy on every push to main.
+
+## Troubleshooting
+
+### "No documents were returned"
+- Ensure all required documents are **Published** in Prismic (not just saved)
+- Check environment variables are set correctly
+- Verify Prismic repository locale matches `PRISMIC_REPOSITORY_LOCALE`
+
+### "Failed to fetch API"
+- Check your `PRISMIC_API_TOKEN` is correct
+- Ensure token is a "Permanent Access Token" (not temporary)
+- Verify repository name doesn't have special characters
+
+### Build errors after upgrade
+- Delete `node_modules` and `.next` folders
+- Run `npm install` again
+- Clear Next.js cache: `rm -rf .next`
+
+## Contributing
+
+This project is currently being modernized. See `MODERNIZATION_ROADMAP.md` for upcoming changes and how you can help.
 
 ## Learn More
----
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Prismic Documentation](https://prismic.io/docs)
+- [Project Modernization Roadmap](./MODERNIZATION_ROADMAP.md)
+- [Prismic Setup Guide](./PRISMIC_SETUP.md)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
----
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Project Configuration
----
-
-### Add Custom Types to Prismic
-To get started, you can import the JSON files saved in the `types` directory as custom types in Prismic.
-
-### Add A New Language
-- Add a new language with region in Prismic. Each entry in Prismic will have a locale selector where you can add multi-language content.
-- In `next.config.js`, add the new locale to the `i18n` object. [Learn more about locales in Next.js](https://nextjs.org/docs/advanced-features/i18n-routing).
-- In `/lib/localeFormat.js`, follow the existing examples to add formatting for your new locale.
-
-That's it! No need to create a new subdirectory path.
-
-### Add Questions
-- Add a question within Prismic. Make sure the Question Identifier is set; you'll use this to create a tagging system for the checklist items that will map to this question's answers.
-- In the Checklist Item custom type in Prismic, go to the Filters tab and add a new Group field with an API ID that matches the Question Identifier.
-- Add a relationship field inside that group called Answer. Add the following constraints: Select Custom Type: Answer; Select tags: Sector
+[Add your license here]
